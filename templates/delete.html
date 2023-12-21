@@ -1,0 +1,48 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css" >
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
+  <title>Chainocity | Delete Profile</title>
+</head>
+<body>
+  
+  
+  <br>
+
+  <h2 class="text-center">Delete Profile? </h2>
+
+  <hr>
+
+  <div class="container bg-white shadow-md p-5 form_layout" style="margin-top: 20px;">
+    
+    <form method="POST" autocomplete="off">
+
+      {% csrf_token %}
+
+      <p>Are you sure you want to delete your profile?</p>
+
+      <br>
+
+      <input type="submit" value="Delete Profile" class="btn btn-outline-danger"/>
+
+      <br><br>
+
+      <a href="{% url 'profile' %}">Go back</a>
+
+
+
+    </form>
+
+  </div>
+  
+  
+
+ 
+  
+</body>
+</html>

@@ -16,7 +16,17 @@
 
       <h2>Login!</h2>
 
-      <br>
+      
+      {% for message in messages %}
+
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+
+        <p class="text-dark">{{message}}</p>
+        <br>
+      {% endif %}
+        
+      {% endfor %}
+      
       <br>
 
       <form method="POST" autocomplete="off">
@@ -32,6 +42,10 @@
 
 
       </form>
+      
+      <br>
+
+      <p> Don't have an account? <a href="{% url 'register' %}">Register!</a></p>
   </div>
 </body>
 </html>

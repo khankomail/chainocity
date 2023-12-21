@@ -1,5 +1,5 @@
 from django.forms import models
-# from. models import User
+from. models import User,Profile
 
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
@@ -23,3 +23,26 @@ class LoginForm(AuthenticationForm):
     
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
+
+
+
+
+class UpdateUserForm(forms.ModelForm):
+  
+  password = None
+
+  class Meta:
+
+    model=User
+    fields=['username','email']
+    exclude=['password1','password2',]
+
+
+class UpdateProfileForm(forms.ModelForm):
+
+  profile_pic = forms.ImageField(widget=forms.FileInput(attrs={'class':'form-control-file'}))
+
+  class Meta:
+
+    model = Profile
+    fields = ['profile_pic',]
