@@ -1,0 +1,93 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css" >
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
+  <title>Chainocity | Cart</title>
+</head>
+<body>
+
+  {% include 'base.html' %}
+
+  <br>
+  <h2 class="text-center">Your Cart </h2>
+  
+  {% if cart_items %}
+  <div style="display: flex; justify-content: flex-end; ">
+    <a href="{% url 'checkout' %}">
+    <button type="button" class="btn btn-outline-success" style="margin: 10px;">Checkout</button>
+  </a>
+  </div>
+  {% endif %}
+  
+
+  
+
+
+
+  <form method="POST" action="{% url 'cart' %}">
+    {% csrf_token %}
+
+    <div style="display: flex; justify-content: center;">
+
+        {% if cart_items %}
+            {% for cart_item in cart_items %}
+
+                <div class="card border-primary mb-3" style="max-width: 20rem; margin: 10px;">
+                    <div class="card-header"><h4>{{ cart_item.product.p_title }}</h4></div>
+                    <div class="card-body">
+
+                        <div class="form-group" style="width: 125px; margin-left: 20px;">
+                            <label for="qty-cart">Select quantity</label>
+                            <select class="form-control" id="qty-cart" name="quantity">
+                                <option selected>{{ cart_item.quantity }}</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+
+                        {% if cart_item.product.p_image %}
+                            <img src="{{ cart_item.product.p_image.url }}" alt=""
+                                style="max-width:150px ; max-height:150px ; margin: 10px;">
+                        {% endif %}
+                        <p class="card-text">- Price: {{ cart_item.total_price }}</p>
+                    </div>
+
+                    <br>
+                    <input type="hidden" name="cart_item_id" value="{{ cart_item.id }}">
+                    <button type="submit" class="btn btn-outline-danger">Remove from cart</button>
+                </div>
+
+            {% endfor %}
+        {% else %}
+
+        
+        <p style="margin-top: 40px;">Your cart is empty.</p>
+        {% endif %}
+    </div>
+</form>
+
+  <br>
+
+  
+
+  
+
+  
+
+  
+  
+
+
+    
+  
+</body>
+</html>

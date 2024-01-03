@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css" >
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
+  <title>Chainocity | Plans</title>
+</head>
+<body>
+  {% include 'base.html' %}
+  <br>
+  <h2 class="text-center">Plans</h2>
+  <br>
+   
+
+   <div class="container" style="display: flex; justify-content: space-around;">
+
+
+    <div class="card border-primary mb-3" style="max-width: 20rem;">
+      <div class="card-header" style="text-decoration: underline;">Basic</div>
+      <div class="card-body">
+        <h5 class="card-title">
+			<ul>
+				<li>Cost: 300Rs</li>
+				<br>
+				<li> Need 10 people to use your code before you start to use services.</li>
+				<br>
+				<li>One time payment</li>
+			</ul>
+		</h5>
+		{% if plan.name == "Basic" %}
+        <button type="button" class="btn btn-outline-secondary disabled">Get basic</button>
+		{% else %}
+		<button type="button" class="btn btn-outline-secondary ">Get basic</button>
+		{% endif  %}
+      </div>
+    </div>
+
+
+    <div class="card border-primary mb-3" style="max-width: 20rem;">
+      <div class="card-header">
+		<span class="badge bg-warning">Gold</span></div>
+      <div class="card-body">
+        <h5 class="card-title">
+			<ul>
+				<li>Cost: 1000Rs</li>
+				<br>
+				<li> No need for people to use your code for you to use services.</li>
+				<br>
+				<li>One time payment</li>
+			</ul>
+		</h5>
+        <button type="button" class="btn btn-outline-warning">Get GOLD</button>
+      </div>
+    </div>
+
+   </div>
+
+
+   <br>
+   
+
+   <div class="card mb-3" >
+	
+	<div class="card-body" style="display: flex; justify-content: center;">
+
+		
+		<form method="POST" id="updateOtherForm">
+			{% csrf_token %}
+
+			{% if code.other != "" %}
+    <p>"You have already entered the Referral code."</p>
+	{% else %}
+    <div class="input-group" style="max-width: 500px;">
+        <input type="text" class="form-control" name="other_value" placeholder="Referral code(optional)" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="submit" id="submitOtherButton">Submit</button>
+    </div>
+	{% endif %}
+			
+		</form>
+	</div>
+
+	
+  </div>
+
+
+  <br>
+
+  <div class="card text-white bg-dark mb-3">
+	
+	<div class="card-body">
+	  <p class="card-text">Note: Make sure to keep a screenshoot of the transaction with you afterwards.</p>
+	</div>
+  </div>
+
+
+
+
+
+</body>
+</html>

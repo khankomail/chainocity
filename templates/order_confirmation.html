@@ -1,0 +1,60 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css" >
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
+  <title>Chainocity | Confirmation</title>
+</head>
+<body>
+
+  {% include 'base.html' %}
+
+  <br>
+  <h2 class="text-center">Order Confirmation</h2>
+  <br>
+
+
+  <div style="display: flex; justify-content: center;">
+
+
+    <div class="card border-primary mb-3" style="max-width: 20rem;">
+      <div class="card-header"><h4>Your order ({{ order.id }}) has been placed successfully.</h4></div>
+      <div class="card-body">
+        <h4 class="card-title">Total Price: {{ order.total_price }}</h4>
+        <p class="card-text"><h3>Order Details:</h3>
+          <ul>
+              <li><strong>User:</strong> {{ order.user.username }}</li>
+              <li><strong>Items:</strong>
+                  <ul>
+                      {% for item in order.items.all %}
+                          <li>{{ item.product.p_title }} - Quantity: {{ item.quantity }} - Price: {{ item.total_price }}</li>
+                      {% endfor %}
+                  </ul>
+              </li>
+              <li><strong>Address:</strong> {{ order.address }}</li>
+              <li><strong>Phone Number:</strong> {{ order.phone_number }}</li>
+              <li><strong>Payment Type:</strong> {{ order.get_payment_type_display }}</li>
+              <li><strong>Order Status:</strong> {{ order.get_order_status_display }}</li>
+              <!-- Add more attributes as needed -->
+          </ul>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+
+  
+    
+
+ 
+
+
+  
+</body>
+</html>

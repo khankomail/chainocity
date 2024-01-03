@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
@@ -63,12 +64,21 @@
   
           <li class="nav-item">
       
-            <a class="btn btn-primary navbar-btn" type="button" href="{% url 'my_login' %}">My Affiliate link</a>
+            <a class="btn btn-primary navbar-btn" type="button" href="{% url 'mylink' %}">My Affiliate link</a>
   
           </li> 
           
           &nbsp;     &nbsp;     &nbsp; 
   
+          <li class="nav-item">
+  
+            <a class="btn btn-primary navbar-btn" type="button" href="{% url 'earning' %}">Affiliate Earnings</a>
+  
+          </li>
+  
+  
+          &nbsp;     &nbsp;     &nbsp; 
+
           <li class="nav-item">
   
             <a class="btn btn-danger navbar-btn" type="button" href="{% url 'logout' %}">Logout</a>

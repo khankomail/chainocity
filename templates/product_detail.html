@@ -1,0 +1,112 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css" >
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+  <title>Chainocity | Product</title>
+</head>
+
+<body>
+  {% include 'base.html' %}
+
+  <br>
+
+  <a href="{% url 'cart' %}" class="badge bg-primary" style="text-decoration: none;"><i class="fa-solid fa-cart-shopping"></i>Cart
+    <span  id="cart_quantity">    {{cart|length}} </span>
+  </a>
+
+  
+  
+  <h2 class="text-center">{{product.p_title}}   </h2>
+
+  <br>
+
+  
+
+  <div class="card mb-3">
+    
+    <div class="card-body">
+      <h5 class="card-title">Price: {{product.p_price}} Rs</h5>
+      <h6 class="card-subtitle text-muted">left: {{product.p_stock}}</h6>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center;">
+      {% if product.p_image %}
+      <img src="{{ product.p_image.url }}" alt="" style="max-width:150px ; max-height:150px ; margin: 10px;">
+    {% endif %}
+
+    {% if product.p_image2 %}
+    <img src="{{ product.p_image2.url }}" alt="" style="max-width:150px ; max-height:150px ; margin: 10px;">
+  {% endif %}
+
+  {% if product.p_image3 %}
+      <img src="{{ product.p_image3.url }}" alt="" style="max-width:150px ; max-height:150px ; margin: 10px;">
+    {% endif %}
+    </div>
+    
+    <div class="card-body">
+      <p class="card-text">{{product.p_desc}}</p>
+    </div>
+
+
+    
+    
+
+
+    
+    </div>
+
+    <form method="POST" action="{% url 'cartadd' product_id=product.id %}">
+
+      {% csrf_token %}
+  
+      <div style="display: flex; justify-content: center;">
+  
+          {% if product.p_stock > 0 %}
+          <div class="form-group" style="width: 125px; margin-left: 20px;">
+              <label for="qty-cart">Select quantity</label>
+              <select class="form-control" id="qty-cart" name="quantity">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+              </select>
+          </div>
+          {% else %}
+          {# Handle out-of-stock scenario if needed #}
+          {% endif %}
+  
+          {% if product.p_stock > 0 %}
+          <button type="submit" value="{{ product.id }}" id="add-cart" class="btn btn-outline-primary" style="margin-left: 20px;">Add to cart</button>
+          {% else %}
+          <button type="" class="btn btn-outline-primary disabled" style="margin-left: 20px;">Out of stock</button>
+          {% endif %}
+      </div>
+  
+  </form>
+  
+    <br>
+
+    
+
+
+
+
+
+<script>
+
+
+</script>
+</body>
+
+
+</html>

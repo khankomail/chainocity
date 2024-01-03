@@ -1,0 +1,59 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css" >
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
+  <title>Chainocity | Checkout</title>
+</head>
+<body>
+
+  {% include 'base.html' %}
+
+  <br>
+  <h2 class="text-center">Checkout</h2>
+  <br>
+
+  <div style="display: flex; justify-content: center;">
+    <p class="text-danger">Note: Order automatically will be cancelled on payment method of JazzCash and Easypesa </p>
+  </div>
+  
+  <br>
+
+
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Card title</h4>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p class="card-text"> <form method="post" action="{% url 'checkout' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-outline-success">Place Order</button>
+        
+    </form></p>
+      <br>
+
+      <h3>Your Cart:</h3>
+<ul>
+    {% for cart_item in cart_items %}
+        <li>{{ cart_item.product.p_title }} - Quantity: {{ cart_item.quantity }} - Price: {{ cart_item.total_price }}</li>
+    {% endfor %}
+</ul>
+
+    </div>
+  </div>
+
+
+ 
+
+
+
+
+  
+</body>
+</html>

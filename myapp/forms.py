@@ -1,5 +1,5 @@
 from django.forms import models
-from. models import User,Profile
+from. models import User,Profile,Code,Plan
 
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
@@ -46,3 +46,26 @@ class UpdateProfileForm(forms.ModelForm):
 
     model = Profile
     fields = ['profile_pic',]
+
+
+
+class CheckoutForm(forms.Form):
+    ADDRESS_MAX_LENGTH = 255
+    PHONE_NUMBER_MAX_LENGTH = 11
+
+    PAYMENT_CHOICES = [
+        ('easypesa', 'EasyPesa'),
+        ('jazzcash', 'JazzCash'),
+        ('cashondelivery', 'Cash On Delivery'),
+    ]
+
+    address = forms.CharField(max_length=ADDRESS_MAX_LENGTH, widget=forms.TextInput(attrs={'placeholder': 'Enter your address'}))
+    phone_number = forms.CharField(max_length=PHONE_NUMBER_MAX_LENGTH, widget=forms.TextInput(attrs={'placeholder': 'Enter your phone number'}))
+    payment_type = forms.ChoiceField(choices=PAYMENT_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+    # Add other fields as needed
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data['phone_number']
+        # Add any custom validation for phone number
+        return phone_number
+

@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/morph/bootstrap.min.css" >
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
+  <title>Chainocity | My Code</title>
+</head>
+<body>
+  {% include 'base.html' %}
+  <br>
+  <h2 class="text-center">My Affilite Code </h2>
+  <br>
+
+  
+
+  <div class="container">
+    <div class="card bg-light mb-3 mx-auto" style="max-width: 20rem; ">
+      <div class="card-header">Your Plan: <strong>{{plan.name}}</strong></div>
+      <div class="card-body"  >
+        <br>
+
+        {% if plan.name == "None" %}
+    <h4 class="card-title">Unavailable</h4>
+{% else %}
+    <h4 class="card-title">Code: "{{ code.my }}"</h4>
+{% endif %}
+
+<br>
+{% if plan.name == "None" %}
+
+
+		<a href="{% url 'plan' %}">
+        	<button type="button"  class="btn btn-outline-primary">Generate Code</button>
+      	</a>
+        {% elif plan.name == "Basic" %}
+		<a href="{% url 'plan' %}">
+        	<button type="button" class="btn btn-outline-primary">Upgrade plan</button>
+		</a>
+        {% else %}
+		<a >
+        	<button type="button" class="btn btn-outline-primary disabled">Upgrade plan</button>
+		</a>
+
+        {% endif  %}
+      </div>
+    </div>
+  </div>
+
+
+  
+</body>
+</html>
