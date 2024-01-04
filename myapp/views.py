@@ -3,7 +3,7 @@ from django.contrib import auth
 
 from django.http import JsonResponse 
 
-from .models import Product,Profile,Category,Code,Plan,Cart,CartItem,Order
+from .models import Product,Profile,Category,Code,Plan,Cart,CartItem,Order,LandingPage
 from django.contrib.auth.models import User
 
 from .forms import CreateUserForm,LoginForm,UpdateUserForm,UpdateProfileForm,CheckoutForm
@@ -16,9 +16,10 @@ from django.contrib import messages
 # Create your views here.
 
 def home(request):
-
-
-	return render(request,'index.html')
+		
+    landing_pages = LandingPage.objects.all()
+    context = {'landing_pages': landing_pages}
+    return render(request, 'index.html', context=context)
 
 
 def register(request):
