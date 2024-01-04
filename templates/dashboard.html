@@ -14,10 +14,20 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
   <title>Chainocity | Dashboard</title>
 </head>
-<body>
-  {% include 'base.html' %}
-  
- 
+
+
+
+<body style="background-color: #00DBDE;
+background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+">
+
+
+   {% if user.is_authenticated %}<!-- ////////////////// -->
+
+
+
+   {% include 'base.html' %}
+
   <div class="dropdown" >
     <button class="btn btn-secondary dropdown-toggle" style="margin: 10px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
       Categories
@@ -29,7 +39,8 @@
       
     </ul>
 
-    <a href="{% url 'cart' %}" class="badge bg-primary" style="text-decoration: none;"><i class="fa-solid fa-cart-shopping"></i>
+    <!-- Cart button -->
+    <a href="{% url 'cart' %}" class="btn btn-outline-dark" style="text-decoration: none;"><i class="fa-solid fa-cart-shopping"></i>
       <span  id="cart_quantity">    {{ cart_items_count }}    </span>
     </a>
     
@@ -51,9 +62,10 @@
 {% endif %}
   
 
- 
+<div style="display: flex; flex-wrap: wrap;">
   {% for product in Products %}
-  <div class="container bg-white shadow-md p-5 form_layout"> 
+   
+  <div class="container bg-white shadow-md p-5 " style="flex: 1 0 48%; margin: 10px; border-radius: 15px;" > 
 
 
           <h5>Title: {{product.p_title}}</h5>
@@ -87,7 +99,129 @@
     </div>
     <br> 
     {% endfor %}
+  </div>
 
+{% else %}                          <!-- ////////////////////////////////         -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+
+  <a class="navbar-brand main-heading" style="margin-left: 20px;"> 
+          
+    <h2 style="margin-left: 15px;"> Chainocity</h2> 
+  
+  </a>
+
+  
+  
+  
+  
+
+
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+
+  </button>
+
+
+    <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
+
+      
+      <ul class="navbar-nav ms-auto">
+
+        &nbsp;     &nbsp;     &nbsp; 
+
+
+         <li class="nav-item">
+    
+          <a class="btn btn-outline-primary" type="button" href="{% url 'register' %}" >Register</a>
+
+        </li> 
+
+
+        &nbsp;     &nbsp;     &nbsp; 
+
+
+        <li class="nav-item">
+    
+          <a class="btn btn-outline-primary" type="button" href="{% url 'my_login' %}" style="margin-right: 10px;">Login</a>
+
+        </li> 
+
+        
+
+
+        
+
+      </ul>
+    
+      
+    </div>
+
+
+</nav>
+<br>
+<br>
+
+
+
+<div style="display: flex; flex-wrap: wrap;">
+
+{% for product in Products %}
+  <div class="container bg-white shadow-md p-5 " style="flex: 1 0 48%; margin: 10px; border-radius: 15px;"> 
+
+
+          <h5>Title: {{product.p_title}}</h5>
+          
+
+          {% if product.p_image %}
+      <img src="{{ product.p_image.url }}" alt="" style="max-width:100px ; max-height:100px ;">
+    {% endif %}
+
+    {% if product.p_image2 %}
+    <img src="{{ product.p_image2.url }}" alt="" style="max-width:100px ; max-height:100px ;">
+  {% endif %}
+
+  {% if product.p_image3 %}
+      <img src="{{ product.p_image3.url }}" alt="" style="max-width:100px ; max-height:100px ;">
+    {% endif %}
+
+     
+          <p style="margin-top: 10px;">Describtion: {{product.p_desc}}</p>
+
+          <p>cost: {{product.p_price}} Rs</p>
+
+          <p>left: {{product.p_stock}}</p>
+
+          <br>
+          <a href="{% url ''  %}">
+            <button type="button" class="btn btn-outline-info disabled">Please login to view the product</button>
+          </a>
+          <br>
+
+    </div>
+    <br> 
+    {% endfor %}
+
+  </div>
+
+
+
+
+
+
+
+  {% endif %}
+  
+  
+ 
+  
 
 
 

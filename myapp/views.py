@@ -82,29 +82,35 @@ def logout(request):
 
 
 
-@login_required(login_url='my_login')
+
 def dashboard(request):
+    # Retrieve all products and categories
+    Products = Product.objects.all()
+    Categorys = Category.objects.all()
 
-	Products=Product.objects.all()
+    user_cart = None
+    cart_items = []
+    cart_items_count = 0
 
-	Categorys=Category.objects.all()
-	
-	
+    # Check if the user is authenticated
+    if request.user.is_authenticated:
+        try:
+            # Try to get the user's cart if authenticated
+            user_cart = Cart.objects.get(user=request.user)
+            cart_items = user_cart.items.all()
+            cart_items_count = cart_items.count()
+        except Cart.DoesNotExist:
+            pass
 
-	user_cart = Cart.objects.get(user=request.user)
-	cart_items = user_cart.items.all()
-	cart_items_count = cart_items.count()
+    context = {
+        'Products': Products,
+        'Categorys': Categorys,
+        'user_cart': user_cart,
+        'cart_items': cart_items,
+        'cart_items_count': cart_items_count,
+    }
 
-
-	context = {'Products': Products, 
-						'Categorys':Categorys,
-						'cart_items': cart_items,
-        		'cart_items_count': cart_items_count,}
-
-
-
-	return render (request,'dashboard.html',context=context)
-
+    return render(request, 'dashboard.html', context=context)
 
 
 
