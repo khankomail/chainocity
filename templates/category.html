@@ -10,56 +10,63 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" >
   <title>Chainocity | Category</title>
 </head>
-<body>
+<body style="background-color: #00DBDE;
+background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+">
   {% include 'base.html' %}
   
- 
+  
  
   
  
   
     
   <br>
-  <h2 class="text-center">{{category.name}} </h2>
+  <h2 class="text-center" style="color: white;">{{category.name}} </h2>
   <br>
   
 
  
-  {% for product in products %}
-  <div class="container bg-white shadow-md p-5 form_layout"> 
-
-
-          <h5>Title: {{product.p_title}}</h5>
-          
-
-          {% if product.p_image %}
-      <img src="{{ product.p_image.url }}" alt="" style="max-width:100px ; max-height:100px ;">
+  <div style="display: flex; flex-wrap: wrap;">
+    {% for product in products %}
+     
+    <div class="container bg-white shadow-md p-5 " style="flex: 1 0 48%; margin: 10px; border-radius: 15px;" > 
+  
+  
+            <h5 style="background-color: #FBAB7E;
+            background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+            padding: 5px; color: white; border-radius: 10px; display: flex; justify-content:center ;">Title: {{product.p_title}}</h5>
+            
+  
+            {% if product.p_image %}
+        <img src="{{ product.p_image.url }}" alt="" style="max-width:100px ; max-height:100px ;">
+      {% endif %}
+  
+      {% if product.p_image2 %}
+      <img src="{{ product.p_image2.url }}" alt="" style="max-width:100px ; max-height:100px ;">
     {% endif %}
-
-    {% if product.p_image2 %}
-    <img src="{{ product.p_image2.url }}" alt="" style="max-width:100px ; max-height:100px ;">
-  {% endif %}
-
-  {% if product.p_image3 %}
-      <img src="{{ product.p_image3.url }}" alt="" style="max-width:100px ; max-height:100px ;">
-    {% endif %}
-
-    
-          <p>Describtion: {{product.p_desc}}</p>
-
-          <p>cost: {{product.p_price}} Rs</p>
-
-          <p>left: {{product.p_stock}}</p>
-
-          <br>
-          <a href="{% url 'product' pk=product.id %}">
-            <button type="button" class="btn btn-outline-info">View Product</button>
-          </a>
-          <br>
-
+  
+    {% if product.p_image3 %}
+        <img src="{{ product.p_image3.url }}" alt="" style="max-width:100px ; max-height:100px ;">
+      {% endif %}
+  
+       
+            <p style="margin-top: 10px;"><strong style="color: red;">Describtion:</strong> {{product.p_desc}}</p>
+  
+            <p><strong style="color: red;">Cost:</strong> <strong style="color: orange; font-size: 1.5rem;">{{product.p_price}}</strong> Rs</p>
+  
+            <p><strong style="color: red;">Left:</strong> {{product.p_stock}}</p>
+  
+            <br>
+            <a href="{% url 'product' pk=product.id %}">
+              <button type="button" class="btn btn-outline-info">View Product</button>
+            </a>
+            <br>
+  
+      </div>
+      <br> 
+      {% endfor %}
     </div>
-    <br> 
-    {% endfor %}
 
 
 
