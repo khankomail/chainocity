@@ -54,7 +54,7 @@ class CheckoutForm(forms.Form):
     PHONE_NUMBER_MAX_LENGTH = 11
 
     PAYMENT_CHOICES = [
-        ('easypesa', 'EasyPesa'),
+        ('easypaisa', 'EasyPaisa'),
         ('jazzcash', 'JazzCash'),
         ('cashondelivery', 'Cash On Delivery'),
     ]
@@ -68,4 +68,6 @@ class CheckoutForm(forms.Form):
         phone_number = self.cleaned_data['phone_number']
         # Add any custom validation for phone number
         return phone_number
+    
+    
 

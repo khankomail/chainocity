@@ -11,7 +11,10 @@
 
     <a class="navbar-brand main-heading" style="margin-left: 20px;"> 
             
-      <h2 style="margin-left: 15px;"> Chainocity</h2> 
+      <h2 style="margin-left: 15px; background-color: #4158D0;
+      background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+      
+       padding: 9px; border-radius: 15px; color:white; "> Chainocity</h2> 
     
     </a>
   
@@ -45,7 +48,7 @@
   
            <li class="nav-item">
       
-            <a class="btn btn-primary navbar-btn" type="button" href="{% url 'dashboard' %}" >Dashboard</a>
+            <a class="btn btn-outline-primary" type="button" href="{% url 'dashboard' %}" >Dashboard</a>
   
           </li> 
   
@@ -55,7 +58,7 @@
   
           <li class="nav-item">
       
-            <a class="btn btn-primary navbar-btn" type="button" href="{% url 'profile' %}">Profile</a>
+            <a class="btn btn-outline-primary" type="button" href="{% url 'profile' %}">Profile</a>
   
           </li> 
 
@@ -81,7 +84,7 @@
 
           <li class="nav-item">
   
-            <a class="btn btn-danger navbar-btn" type="button" href="{% url 'logout' %}">Logout</a>
+            <a class="btn btn-outline-dark" type="button" href="{% url 'logout' %}">Logout</a>
   
           </li>
   

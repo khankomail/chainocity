@@ -50,7 +50,7 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
   
     
   <br>
-  <h2 class="text-center">Dashboard </h2>
+  <h2 class="text-center" style="color: white;">Dashboard </h2>
   <br>
 
   {% if messages %}
@@ -68,7 +68,9 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
   <div class="container bg-white shadow-md p-5 " style="flex: 1 0 48%; margin: 10px; border-radius: 15px;" > 
 
 
-          <h5>Title: {{product.p_title}}</h5>
+          <h5 style="background-color: #FBAB7E;
+          background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+          padding: 5px; color: white; border-radius: 10px; display: flex; justify-content:center ;">Title: {{product.p_title}}</h5>
           
 
           {% if product.p_image %}
@@ -84,11 +86,11 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
     {% endif %}
 
      
-          <p style="margin-top: 10px;">Describtion: {{product.p_desc}}</p>
+          <p style="margin-top: 10px;"><strong style="color: red;">Describtion:</strong> {{product.p_desc}}</p>
 
-          <p>cost: {{product.p_price}} Rs</p>
+          <p><strong style="color: red;">Cost:</strong> <strong style="color: orange; font-size: 1.5rem;">{{product.p_price}}</strong> Rs</p>
 
-          <p>left: {{product.p_stock}}</p>
+          <p><strong style="color: red;">Left:</strong> {{product.p_stock}}</p>
 
           <br>
           <a href="{% url 'product' pk=product.id %}">
@@ -177,9 +179,11 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
   <div class="container bg-white shadow-md p-5 " style="flex: 1 0 48%; margin: 10px; border-radius: 15px;"> 
 
 
-          <h5>Title: {{product.p_title}}</h5>
+          <h5 style="background-color: #FBAB7E;
+          background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+          padding: 5px; color: white; border-radius: 10px;">Title: {{product.p_title}}</h5>
           
-
+<div style="display: flex; max-height: 100px;  justify-content: space-between; ">
           {% if product.p_image %}
       <img src="{{ product.p_image.url }}" alt="" style="max-width:100px ; max-height:100px ;">
     {% endif %}
@@ -191,6 +195,7 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
   {% if product.p_image3 %}
       <img src="{{ product.p_image3.url }}" alt="" style="max-width:100px ; max-height:100px ;">
     {% endif %}
+  </div>
 
      
           <p style="margin-top: 10px;">Describtion: {{product.p_desc}}</p>
@@ -232,7 +237,25 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"  crossorigin="anonymous"></script>
+
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+  
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+  
+    crossorigin="anonymous">
+  
+    </script>
+    
+
+    
 </body>
+
+
+
 
 
 

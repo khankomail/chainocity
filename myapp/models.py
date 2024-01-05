@@ -97,7 +97,7 @@ class Cart(models.Model):
 
 class Order(models.Model):
     PAYMENT_CHOICES = [
-        ('easypesa', 'EasyPesa'),
+        ('easypaisa', 'EasyPaisa'),
         ('jazzcash', 'JazzCash'),
         ('cashondelivery', 'Cash On Delivery'),
     ]

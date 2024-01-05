@@ -19,7 +19,7 @@
   <br>
 
   <div style="display: flex; justify-content: center;">
-    <p class="text-danger">Note: Order automatically will be cancelled on payment method of JazzCash and Easypesa </p>
+    <p class="text-danger">Note: Order automatically will be cancelled on payment method of JazzCash and Easypaisa </p>
   </div>
   
   <br>
@@ -27,15 +27,47 @@
 
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      <p class="card-text"> <form method="post" action="{% url 'checkout' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
+      <h4 class="card-title">Checkout Info</h4>
+      
+      <p class="card-text">
+        <form method="post" action="{% url 'checkout' %}">
+          {% csrf_token %}
+      
+          <div class="form-group">
+            <label for="{{ form.address.id_for_label }}" style="background-color: #FBAB7E;
+            background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+            padding: 5px; color: white; border-radius: 10px;">Address:</label>
+            
+              {{ form.address  }}
+            
+            
+          </div>
 
-        <button type="submit" class="btn btn-outline-success">Place Order</button>
-        
-    </form></p>
+          <br>
+      
+          <div class="form-group">
+            <label for="{{ form.phone_number.id_for_label }}" style="background-color: #FBAB7E;
+            background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+            padding: 5px; color: white; border-radius: 10px;">Phone Number:</label>
+            {{ form.phone_number }}
+          </div>
+
+          <br>
+      
+          <div class="form-group">
+            <label for="{{ form.payment_type.id_for_label }}" style="background-color: #FBAB7E;
+            background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+            padding: 5px; color: white; border-radius: 10px; margin-bottom: 10px;" >Payment Type:</label>
+            {{ form.payment_type }}
+          </div>
+
+          <br>
+      
+          <!-- Add other fields as needed -->
+      
+          <button type="submit" class="btn btn-outline-success">Place Order</button>
+        </form>
+      </p>
       <br>
 
       <h3>Your Cart:</h3>
