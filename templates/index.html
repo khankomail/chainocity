@@ -20,7 +20,10 @@
 
     <a class="navbar-brand main-heading"> 
             
-      <h2 style="margin-left: 15px;"> Chainocity</h2> 
+      <h2 style="margin-left: 15px; background-color: #4158D0;
+      background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+      
+       padding: 9px; border-radius: 15px; color:white; "> Chainocity</h2>
     
     </a>
 
@@ -80,87 +83,150 @@
 background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 ">
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-top: 1px rgb(224, 224, 224) solid;">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+
+      {% for cat in categories %}
+  <li class="nav-item active" >
+    <a class="nav-link" href="{% url 'category' ct=cat.name %}" style="color: black;">{{ cat.name }}</a>
+  </li>
+{% endfor %}
+      
+    </ul>
+  </div>
+</nav>
+
   <br>
   <br>
 
-  <div class="text-center">
+ 
 
-    <br>
-    <br>
+    
 
 <div style="display: flex; justify-content: center;">
   <h2 style="color: white; " > "Chainocity.... A home for your all your needs." </h2>
   </div>
   
 <br><br>
-    <br>
 
-    <div style="display: flex; ">
 
-      <div style="display: flex; justify-content: center; max-width: 70%; align-items: center;">
-        <p style="color: white; max-width: 80%; font-size: 18px;">
-          Embark on a shopping extravaganza at our online haven, where diversity meets quality! Explore an extensive array of must-haves, from cutting-edge electronics to fashion-forward essentials. Elevate your experience with seamless navigation, exclusive deals, and a symphony of convenience. Welcome to your ultimate destination for all things fabulous!
-        </p>
+
+<div style="display: flex; justify-content: center;">
+  <h3 style="color: white; " > "Our Trendy Products" </h3>
+  </div>
+
+
+    <br><br> 
+
+
+
+    {% for landing_page in landing_pages %}
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      
+      <div class="carousel-inner" >
+        <div class="carousel-item active" >
+          <img class="d-block w-100" src="{{ landing_page.img1.url }}" alt="First slide" style="height: 400px; ">
+        </div>
+        <div class="carousel-item" >
+          <img class="d-block w-100" src="{{ landing_page.img2.url }}" alt="Second slide" style="height: 400px; ">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="{{ landing_page.img3.url }}" alt="Third slide" style="height: 400px; ">
+        </div>
       </div>
-      <div style="max-width: 30%;">
-        {% for landing_page in landing_pages %}
-        <img style="height: 300px; width: 300px; border-radius: 10px;" alt="img1" src="{{ landing_page.img1.url }}">
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        
+      </a>
+    </div>
+    {% endfor %}
+
+<br><br>
+
+
+    <div class="card mb-3" >
+      <div style="display: flex; justify-content: center;">
+        <h2 class="card-header" style="color: black;">Select by Categories</h2>
+      </div>
+      
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+
+        {% for category in categories %}
+        {% with first_product=category.product_set.first %}
+        {% if first_product %}
+        
+        <div style="margin: 10px;">
+          <a href="{% url 'category' ct=category.name %}" style="text-decoration: none;">
+        <img src="{{ first_product.p_image.url }}" alt="First Product Image" style="margin: 10px; border-radius: 15px; max-width: 150px;" >
+        
+        <p class="text-center" style="color: black;">{{category}}</p>
+      </a>
+        </div>
+        
+        {% endif %}
+        {% endwith %}
         {% endfor %}
-        
-    
-    
 
-        
       </div>
-      <br>
-      
-      
+    
     </div>
 
-    <br> <br><br><br>
+    <br><br><br>
+
+    {% for landing_page in landing_pages %}
     
-   
-    <!-- <div style="display: flex; justify-content: center;">
-      <h2 style="color: white; " > "Our Referral Program" </h2>
-      </div> -->
-
-      <!-- <br><br><br> -->
-
-    <!-- <div style="display: flex; ">
-
-      <div style="max-width: 40%; ">
-        {% for landing_page in landing_pages %}
-        <img style="height: 300px; width: 400px; border-radius: 10px; margin-left: 30px;" alt="img2" src="{{ landing_page.img2.url }}">
-        {% endfor %}
-
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      
+      <div class="carousel-inner" >
+        <div class="carousel-item active" >
+          <img class="d-block w-100" src="{{ landing_page.img1.url }}" alt="First slide" style="height: 400px; ">
+        </div>
+        <div class="carousel-item" >
+          <img class="d-block w-100" src="{{ landing_page.img2.url }}" alt="Second slide" style="height: 400px; ">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="{{ landing_page.img3.url }}" alt="Third slide" style="height: 400px; ">
+        </div>
       </div>
 
-      <div style="display: flex; justify-content: center; max-width: 60%; align-items: center;">
-        <p style="color: white; max-width: 80%; font-size: 18px;">
-          Join our referral program and turn your connections into rewards! Share your favorite products, invite friends, and unlock exclusive perks with every successful referral. Start sharing, start earning – it's that simple!
-        </p>
-      </div>
       
-      
-      
-      
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        
+      </a>
     </div>
+    {% endfor %}
+    
+    
+    <br><br><br>
 
-    
 
-    
-      
-    <br><br><br><br><br><br> -->
-    
-    <div>
+
+
+
+    <div style="display: flex; flex-direction: column; align-items: center;">
       <p style="color: white; ">
-        <strong>what are you waiting for see our Products Now!</strong> </p>
-      <a class="btn btn-outline-primary" type="button" href="{% url 'register' %}">Products</a>
+        <strong>What are you waiting for? See our Products Now!</strong> 
+      </p>
+      <a class="btn btn-outline-primary" type="button" href="{% url 'dashboard' %}">Products</a>
     </div>
       
 
   
-  </div>
+ 
 
   <br><br><br><br>
 

@@ -88,6 +88,40 @@
 
 
   </div>
+
+  <br><br>
+
+<h3 style="margin: 10px;">Order History:</h3>
+  <br>
+
+  <div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Order Id</th>
+          <th scope="col">Created at</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Status</th>
+          
+        </tr>
+      </thead>
+
+
+      {% for order in orders %}
+      <tbody style="border-bottom: 1px solid black;">
+          <tr class="table-active">
+              <th scope="row">{{ order.id }}</th>
+              <td>{{ order.created_at }}</td>
+              <td>{{ order.total_price }}</td>
+              <td>{{ order.order_status }}</td>
+          </tr>
+      </tbody>
+
+  {% endfor %}
+
+
+    </table>
+  </div>
   
   
 

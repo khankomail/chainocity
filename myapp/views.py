@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse,redirect, get_object_or_404
 from django.contrib import auth
-
+from decimal import Decimal
 from django.http import JsonResponse 
 
 from .models import Product,Profile,Category,Code,Plan,Cart,CartItem,Order,LandingPage
@@ -16,10 +16,13 @@ from django.contrib import messages
 # Create your views here.
 
 def home(request):
-		
     landing_pages = LandingPage.objects.all()
-    context = {'landing_pages': landing_pages}
+    categories = Category.objects.all()
+    products = Product.objects.all()
+
+    context = {'landing_pages': landing_pages, 'categories': categories, 'products': products}
     return render(request, 'index.html', context=context)
+
 
 
 def register(request):
@@ -77,7 +80,7 @@ def my_login(request):
 def logout(request):
 	auth.logout(request)
 
-	return redirect("")
+	return redirect("home")
 
 
 
@@ -119,6 +122,7 @@ def profile(request):
 
 
 	profile = Profile.objects.get(user=request.user)
+	orders = Order.objects.filter(user=request.user)
 
 	user_form = UpdateUserForm(instance=request.user)
 
@@ -154,7 +158,7 @@ def profile(request):
 	profile_pic= Profile.objects.get(user=request.user)
 
 
-	context={'user_form':user_form, 'form_2':form_2,'profile':profile_pic}
+	context={'user_form':user_form, 'form_2':form_2,'profile':profile_pic,'orders':orders}
 
 	return render(request,'profile.html',context=context) 
 
@@ -176,7 +180,7 @@ def delete_profile(request):
 
 
 
-@login_required(login_url='my_login')
+
 def product(request,pk):
 	product=Product.objects.get(id=pk)
 	context={
@@ -185,16 +189,17 @@ def product(request,pk):
 	return render(request,'product_detail.html',context=context)
 
 
-@login_required(login_url='my_login')
-def category(request,ct):
 
+def category(request,ct):
+	
+	Categorys = Category.objects.all()
 	ct=ct.replace('-',' ')
 
 	try:
 		category = Category.objects.get(name=ct)
 		products = Product.objects.filter(category=category)
 
-		context={'products': products, 'category':category}
+		context={'products': products, 'category':category, 'Categorys': Categorys,}
 
 		return render(request,'category.html' ,context=context)
 
@@ -253,6 +258,10 @@ def earning(request):
 	context={'code':code,'code_users':code_users}
 
 	return render (request,'earning.html',context=context)
+
+
+
+
 
 
 @login_required(login_url='my_login')
@@ -327,13 +336,16 @@ def checkout(request):
         form = CheckoutForm(request.POST)
 
         if form.is_valid():
+            # Calculate the total price including delivery fee
+            total_price = user_cart.total_cart_price() + Decimal(250)
+
             # Create a new order instance
             new_order = Order(
                 user=request.user,
                 address=form.cleaned_data['address'],
                 phone_number=form.cleaned_data['phone_number'],
                 payment_type=form.cleaned_data['payment_type'],
-                total_price=user_cart.total_cart_price(),
+                total_price=total_price,  # Updated total_price calculation
             )
             new_order.save()
 
@@ -367,3 +379,29 @@ def order_confirmation(request, order_id):
     }
 
     return render(request, 'order_confirmation.html', context)
+
+
+
+def user_redirection(request,pk):
+	
+	form = LoginForm
+	
+	if request.method == 'POST':
+
+		form = LoginForm(request, data=request.POST)
+		if form.is_valid():
+
+			username = request.POST.get('username')
+			password = request.POST.get('password')
+
+			user = authenticate(request,username=username,password=password)
+
+			if user is not None:
+
+				auth.login(request,user)
+				return redirect('product', pk=pk)
+			
+	context = {'form': form}
+
+	return render(request,'my_login.html',context=context)
+	

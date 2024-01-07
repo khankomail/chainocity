@@ -2,9 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-  path('',views.dashboard, name=""),
 
-  path('home',views.home, name="home"),
+  path('',views.home, name="home"),
   
   path('register',views.register, name="register"),
 
@@ -39,6 +38,8 @@ urlpatterns = [
   path('checkout/', views.checkout, name='checkout'),
 
   path('order_confirmation/<int:order_id>/', views.order_confirmation, name='order_confirmation'),
+
+  path('userredirection/<int:pk>/',views.user_redirection, name="userredirection"),
 
   
 ]

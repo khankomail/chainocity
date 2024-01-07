@@ -22,7 +22,7 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
 ">
 
 
-   {% if user.is_authenticated %}<!-- ////////////////// -->
+   {% if user.is_authenticated %}<!-- ///////////    if user is logged in        /////// -->
 
 
 
@@ -40,7 +40,7 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
     </ul>
 
     <!-- Cart button -->
-    <a href="{% url 'cart' %}" class="btn btn-outline-dark" style="text-decoration: none;"><i class="fa-solid fa-cart-shopping"></i>
+    <a href="{% url 'cart' %}" class="btn btn-outline-dark" style="text-decoration: none;">Cart <i class="fa-solid fa-cart-shopping"></i>
       <span  id="cart_quantity">    {{ cart_items_count }}    </span>
     </a>
     
@@ -49,66 +49,34 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
  
   
     
-  <br>
+  
   <h2 class="text-center" style="color: white;">Dashboard </h2>
   <br>
 
+  <div class="text-center">
   {% if messages %}
   <ul class="messages">
     {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        <p class="text-primary-emphasis">{{ message }}</p>
+      </li>
     {% endfor %}
   </ul>
 {% endif %}
-  
 
-<div style="display: flex; flex-wrap: wrap;">
-  {% for product in Products %}
-   
-  <div class="container bg-white shadow-md p-5 " style="flex: 1 0 48%; margin: 10px; border-radius: 15px;" > 
+</div>
 
 
-          <h5 style="background-color: #FBAB7E;
-          background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-          padding: 5px; color: white; border-radius: 10px; display: flex; justify-content:center ;">Title: {{product.p_title}}</h5>
-          
 
-          {% if product.p_image %}
-      <img src="{{ product.p_image.url }}" alt="" style="max-width:100px ; max-height:100px ;">
-    {% endif %}
-
-    {% if product.p_image2 %}
-    <img src="{{ product.p_image2.url }}" alt="" style="max-width:100px ; max-height:100px ;">
-  {% endif %}
-
-  {% if product.p_image3 %}
-      <img src="{{ product.p_image3.url }}" alt="" style="max-width:100px ; max-height:100px ;">
-    {% endif %}
-
-     
-          <p style="margin-top: 10px;"><strong style="color: red;">Describtion:</strong> {{product.p_desc}}</p>
-
-          <p><strong style="color: red;">Cost:</strong> <strong style="color: orange; font-size: 1.5rem;">{{product.p_price}}</strong> Rs</p>
-
-          <p><strong style="color: red;">Left:</strong> {{product.p_stock}}</p>
-
-          <br>
-          <a href="{% url 'product' pk=product.id %}">
-            <button type="button" class="btn btn-outline-info">View Product</button>
-          </a>
-          <br>
-
-    </div>
-    <br> 
-    {% endfor %}
-  </div>
-
-{% else %}                          <!-- ////////////////////////////////         -->
+{% else %}    <!-- ////////////////////////////////   if user is not logged in      -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
 
-  <a class="navbar-brand main-heading" style="margin-left: 20px;"> 
-          
-    <h2 style="margin-left: 15px;"> Chainocity</h2> 
+  <a class="navbar-brand main-heading" style="margin-left: 20px;" href="{% url 'home' %}"> 
+            
+    <h2 style="margin-left: 15px; background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    
+     padding: 9px; border-radius: 15px; color:white; "> Chainocity</h2> 
   
   </a>
 
@@ -170,50 +138,48 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
 </nav>
 <br>
 <br>
-
+{% endif %}
 
 
 <div style="display: flex; flex-wrap: wrap;">
-
-{% for product in Products %}
-  <div class="container bg-white shadow-md p-5 " style="flex: 1 0 48%; margin: 10px; border-radius: 15px;"> 
+  {% for product in Products %}
+   
+  <div class="container bg-white shadow-md p-5 " style="flex: 1 0 48%; margin: 10px; border-radius: 15px;" > 
 
 
           <h5 style="background-color: #FBAB7E;
           background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-          padding: 5px; color: white; border-radius: 10px; display: flex; justify-content: center;">Title: {{product.p_title}}</h5>
+          padding: 5px; color: white; border-radius: 10px; display: flex; justify-content:center ;">Title: {{product.p_title}}</h5>
+
           
-<div style="display: flex; max-height: 100px;  justify-content: space-between; ">
+          <div style="display: flex; justify-content: center;">
           {% if product.p_image %}
-      <img src="{{ product.p_image.url }}" alt="" style="max-width:100px ; max-height:100px ;">
-    {% endif %}
-
-    {% if product.p_image2 %}
-    <img src="{{ product.p_image2.url }}" alt="" style="max-width:100px ; max-height:100px ;">
-  {% endif %}
-
-  {% if product.p_image3 %}
-      <img src="{{ product.p_image3.url }}" alt="" style="max-width:100px ; max-height:100px ;">
-    {% endif %}
-  </div>
-
-     
-  <p style="margin-top: 10px;"><strong style="color: red;">Describtion:</strong> {{product.p_desc}}</p>
-
-  <p><strong style="color: red;">Cost:</strong> <strong style="color: orange; font-size: 1.5rem;">{{product.p_price}}</strong> Rs</p>
-
-  <p><strong style="color: red;">Left:</strong> {{product.p_stock}}</p>
+          <img src="{{ product.p_image.url }}" alt="" style="font-size: 5vw; height: 50vh;">
+          {% endif %}
+          </div>
 
           <br>
-          <a href="{% url ''  %}">
-            <button type="button" class="btn btn-outline-info disabled">Please login to view the product</button>
+    
+          <!-- <div style="display: flex; flex-wrap: wrap; width: 100%; max-height: 10vh; overflow: hidden; scroll-behavior: smooth;">
+            <p style="margin-top: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <strong style="color: red;">Description:</strong> {{product.p_desc}}
+            </p>
+        </div> -->
+          
+
+          <p><strong style="color: red;">Cost:</strong> <strong style="color: orange; font-size: 1.5rem;">{{product.p_price}}</strong> Rs</p>
+
+          <p><strong style="color: red;">Left:</strong> {{product.p_stock}}</p>
+
+          <br>
+          <a href="{% url 'product' pk=product.id %}">
+            <button type="button" class="btn btn-outline-info">View Product</button>
           </a>
           <br>
 
     </div>
     <br> 
     {% endfor %}
-
   </div>
 
 
@@ -222,19 +188,14 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
 
 
 
-  {% endif %}
+  
   
   
  
   
 
 
-  <div class="card" style="display: flex; justify-content: center; align-items: center; position: fixed; bottom: 0; width: 100%; opacity: .8;" >
-    <br>
-    <p>Contact us at our Email: usamawaris3133@gmail.com, Phone Number: 03412349992</p>
-    <p>Reach us at: Ali park extension Malik Menazir Ali Street E 857 Bedian Road Lahore cantt</p>
-</div>
-
+ 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

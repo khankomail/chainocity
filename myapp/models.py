@@ -127,6 +127,9 @@ class Order(models.Model):
 class LandingPage(models.Model):
     img1=models.ImageField(null=True, blank=True,default='defaultUser.jpg')
     img2=models.ImageField(null=True, blank=True,default='defaultUser.jpg')
+    img3=models.ImageField(null=True, blank=True,default='defaultUser.jpg')
+
+
 
 
 
